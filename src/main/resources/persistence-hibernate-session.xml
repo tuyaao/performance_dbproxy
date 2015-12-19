@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/tx  
+        http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+
+	<!--指定实现JPA的适配器-->  
+    <bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">  
+        <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />  
+    </bean> 
+    
+	<!-- 利用Spring的实体管理器工厂来创建JPA实体管理器  -->  
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">   
+        <property name="dataSource" ref="dataSource"/>  
+        <property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/>  
+        <property name="packagesToScan" value="com.free4lab.monitorproxy.daomysql"/><!--待扫描的实体类包，不再需要persistence.xml了-->  
+        <property name="jpaProperties">  
+            <props>  
+                <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>  <!-- 命名策略 -->
+                <prop key="hibernate.show_sql">false</prop>  
+                <prop key="hibernate.hbm2ddl.auto">none</prop> <!-- 根据bean自动更新数据库表结构 -->
+            </props>  
+        </property>  
+    </bean>  
+      
+    <!-- Jpa 事务配置 -->  
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">  
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>  
+    </bean>  
+	
+	<!-- 配置使用注解的方式来使用事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- 这是事务通知操作，使用的事务管理器引用自 transactionManager -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="query*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+</beans>
