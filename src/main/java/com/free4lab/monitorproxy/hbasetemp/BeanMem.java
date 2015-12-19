@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "beanMem")
 public class BeanMem {
 
-	private Integer id;// 云主机在mysql表里的id
-	private Date createdTime;// 测试时间，long型
-	private float transferSpeed;// 内存的传输速度
+	private Integer id;// 云主机在mysql表里的id    
+	private Date createdTime;// 测试时间，long型    
+	private float transferSpeed;// 内存的传输速度    
 
 	public BeanMem() {
 

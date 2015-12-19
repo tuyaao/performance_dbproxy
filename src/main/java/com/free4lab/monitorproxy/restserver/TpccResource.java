@@ -10,6 +10,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.json.JSONException;
@@ -38,7 +39,7 @@ public class TpccResource extends AbstractResource{
 	@Path("Tpcc")
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public List<BeanTpcc> getIdByMac(@PathParam("id") String id, @PathParam(BEGIN_TIME) String start, @PathParam(END_TIME) String end) {
+	public List<BeanTpcc> getIdByMac(@QueryParam("id") String id, @QueryParam(BEGIN_TIME) String start, @QueryParam(END_TIME) String end) {
 		return resolveHbaseResultit(test.getTpcc(id, start, end));
 	}
 	
@@ -49,7 +50,7 @@ public class TpccResource extends AbstractResource{
 		for(JSONObject jSONObject : list){
 			BeanTpcc beanTpcc= null;
 			try {
-				beanTpcc = new BeanTpcc(Integer.getInteger(jSONObject.getString("id")), Date.valueOf(jSONObject.getString("createdTime")), (float)jSONObject.getDouble("tpmc"));
+				beanTpcc = new BeanTpcc(Integer.valueOf(jSONObject.getString("id")), new Date(Long.valueOf(jSONObject.getString("createdTime"))), (float)jSONObject.getDouble("tpmc"));
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

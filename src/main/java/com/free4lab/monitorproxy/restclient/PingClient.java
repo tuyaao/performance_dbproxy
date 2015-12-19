@@ -45,9 +45,8 @@ public class PingClient extends AbstractClient<BeanPing>{
 	public static void main(String[] args) {
 		PingClient hostClient = new PingClient();
 		List<BeanPing> list = hostClient.findPingByIdTime("35", new Timestamp(Long.valueOf("1447203600000")), new Timestamp(Long.valueOf(Calendar.getInstance().getTimeInMillis()+"")));
-		System.out.println("列表的个数："+list.size());
 		for (BeanPing it : list){
-			System.out.println( it.toString() );	
+			System.out.println( "收到结果:"+it.toString() );	
 		}
 	}
 	

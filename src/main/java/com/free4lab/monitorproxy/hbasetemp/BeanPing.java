@@ -11,7 +11,7 @@ public class BeanPing {
 	private Integer id;// 云主机在mysql表里的id
 	private Date createdTime;// 测试时间，long型
 	private String destIp;// ping的目标ip/域名
-	private Integer loss;// ping的丢包率，百分之
+	private float loss;// ping的丢包率，百分之
 	private float avg;// ping的平均时延rtt，单位：ms
 
 	public BeanPing() {
@@ -22,7 +22,7 @@ public class BeanPing {
 		this.id = id;
 	}
 
-	public BeanPing(Integer id, Date createdTime, String destIp, Integer loss,
+	public BeanPing(Integer id, Date createdTime, String destIp, float loss,
 			float avg) {
 		this.id = id;
 		this.createdTime = createdTime;
@@ -63,11 +63,11 @@ public class BeanPing {
 	}
 
 	@XmlElement
-	public Integer getLoss() {
+	public float getLoss() {
 		return loss;
 	}
 
-	public void setLoss(Integer loss) {
+	public void setLoss(float loss) {
 		this.loss = loss;
 	}
 

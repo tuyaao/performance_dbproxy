@@ -42,9 +42,8 @@ public class CpuClient extends AbstractClient<BeanCpu>{
 	public static void main(String[] args) {
 		CpuClient hostClient = new CpuClient();
 		List<BeanCpu> list = hostClient.findCpuByIdTime("35", new Timestamp(Long.valueOf("1450080000000")), new Timestamp(Long.valueOf("1450512000000")));
-		System.out.println("列表的个数："+list.size());
 		for (BeanCpu it : list){
-			System.out.println( it.toString() );	
+			System.out.println( "收到结果:"+it.toString() );	
 		}
 	}
 	

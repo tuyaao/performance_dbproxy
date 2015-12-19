@@ -45,9 +45,8 @@ public class MemClient extends AbstractClient<BeanMem>{
 	public static void main(String[] args) {
 		MemClient hostClient = new MemClient();
 		List<BeanMem> list = hostClient.findMemByIdTime("35", new Timestamp(Long.valueOf("1447203600000")), new Timestamp(Long.valueOf(Calendar.getInstance().getTimeInMillis()+"")));
-		System.out.println("列表的个数："+list.size());
 		for (BeanMem it : list){
-			System.out.println( it.toString() );	
+			System.out.println( "收到结果:"+it.toString() );	
 		}
 	}
 	

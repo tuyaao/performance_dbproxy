@@ -10,6 +10,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.json.JSONException;
@@ -37,7 +38,7 @@ public class IozoneResource extends AbstractResource{
 	@Path("Io")
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public List<BeanIozone> getIdByMac(@PathParam("id") String id, @PathParam(BEGIN_TIME) String start, @PathParam(END_TIME) String end) {
+	public List<BeanIozone> getIdByMac(@QueryParam("id") String id, @QueryParam(BEGIN_TIME) String start, @QueryParam(END_TIME) String end) {
 		return resolveHbaseResultit(test.getIozone(id, start, end));
 	}
 	
@@ -48,11 +49,11 @@ public class IozoneResource extends AbstractResource{
 		for(JSONObject jSONObject : list){
 			BeanIozone beanIozone= null;
 			try {
-				beanIozone = new BeanIozone(Integer.getInteger(jSONObject.getString("id")), Date.valueOf(jSONObject.getString("createdTime")), 
-						Integer.getInteger(jSONObject.getString("fileSize")), Integer.getInteger(jSONObject.getString("recordSize")), 
-						Integer.getInteger(jSONObject.getString("write")), Integer.getInteger(jSONObject.getString("rewrite")),
-						Integer.getInteger(jSONObject.getString("read")), Integer.getInteger(jSONObject.getString("reread")),
-						Integer.getInteger(jSONObject.getString("randomRead")), Integer.getInteger(jSONObject.getString("randomWrite")));
+				beanIozone = new BeanIozone(Integer.valueOf(jSONObject.getString("id")), new Date(Long.valueOf(jSONObject.getString("createdTime"))), 
+						Integer.valueOf(jSONObject.getString("fileSize")), Integer.valueOf(jSONObject.getString("recordSize")), 
+						Integer.valueOf(jSONObject.getString("write")), Integer.valueOf(jSONObject.getString("rewrite")),
+						Integer.valueOf(jSONObject.getString("read")), Integer.valueOf(jSONObject.getString("reread")),
+						Integer.valueOf(jSONObject.getString("randomRead")), Integer.valueOf(jSONObject.getString("randomWrite")));
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

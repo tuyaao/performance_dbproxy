@@ -10,6 +10,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.json.JSONException;
@@ -36,7 +37,7 @@ public class MemResource extends AbstractResource{
 	@Path("Mem")
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public List<BeanMem> getIdByMac(@PathParam("id") String id, @PathParam(BEGIN_TIME) String start, @PathParam(END_TIME) String end) {
+	public List<BeanMem> getIdByMac(@QueryParam("id") String id, @QueryParam(BEGIN_TIME) String start, @QueryParam(END_TIME) String end) {
 		return resolveHbaseResultit(test.getMem(id, start, end));
 	}
 	
@@ -47,7 +48,7 @@ public class MemResource extends AbstractResource{
 		for(JSONObject jSONObject : list){
 			BeanMem beanMem= null;
 			try {
-				beanMem = new BeanMem(Integer.getInteger(jSONObject.getString("id")), Date.valueOf(jSONObject.getString("createdTime")), (float)jSONObject.getDouble("transferSpeed"));
+				beanMem = new BeanMem(Integer.valueOf(jSONObject.getString("id")), new Date(Long.valueOf(jSONObject.getString("createdTime"))), (float)jSONObject.getDouble("transferSpeed"));
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

@@ -22,12 +22,11 @@ public class test {
 	public static String getCpu(String id, String Start, String end){
 		Map<String, String> filter = new HashMap<String, String>();
 		filter.put("id", id);
-		System.out.println("id:" + id);
-//		filter.put(BEGIN_TIME, Start);
-//		filter.put(END_TIME, end);
+		filter.put(BEGIN_TIME, Start);
+		filter.put(END_TIME, end);
 		LogOperation log = new LogOperationImpl("performance-cpu", "74a6d70b20e448899cf2811e29e0ec13", "JqpaykDFR9xVwBJB8XwwtNvYWZf1xGur");
 	    String string  = log.getLog("performance-cpu", filter);
-	    System.out.println("string:" + string);
+	    System.out.println( string );	
 	    return string;
 		}
 	
@@ -74,9 +73,7 @@ public class test {
 	
 	public static void main(String[] args) {
 		test testit = new test();
-		logger.error("hbase最终时间:"+new Timestamp(Long.valueOf("1447632000000")));
-		logger.error("hbase开始时间:"+new Timestamp(Long.valueOf("1447203600000")));
-		String result = testit.getPing( "35", "1447203600000", "1447632000000" );
+		String result = testit.getMem( "35", "1441632000000", "1449203600000" );
 		logger.error("END_TIME:"+result);
 		JSONObject jSONObject = null;
 		try {

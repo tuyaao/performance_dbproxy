@@ -10,6 +10,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.json.JSONException;
@@ -36,7 +37,7 @@ public class PingResource extends AbstractResource{
 	@Path("Ping")
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public List<BeanPing> getIdByMac(@PathParam("id") String id, @PathParam(BEGIN_TIME) String start, @PathParam(END_TIME) String end) {
+	public List<BeanPing> getIdByMac(@QueryParam("id") String id, @QueryParam(BEGIN_TIME) String start, @QueryParam(END_TIME) String end) {
 		return resolveHbaseResultit(test.getPing(id, start, end));
 	}
 	
@@ -47,7 +48,7 @@ public class PingResource extends AbstractResource{
 		for(JSONObject jSONObject : list){
 			BeanPing beanPing= null;
 			try {
-				beanPing = new BeanPing(Integer.getInteger(jSONObject.getString("id")), Date.valueOf(jSONObject.getString("createdTime")),jSONObject.getString("destIp"), Integer.getInteger(jSONObject.getString("loss")), (float)jSONObject.getDouble("transferSpeed"));
+				beanPing = new BeanPing(Integer.valueOf(jSONObject.getString("id")), new Date(Long.valueOf(jSONObject.getString("createdTime"))),jSONObject.getString("destIp"), Float.parseFloat(jSONObject.getString("loss")), Float.parseFloat(jSONObject.getString("avg")));
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
