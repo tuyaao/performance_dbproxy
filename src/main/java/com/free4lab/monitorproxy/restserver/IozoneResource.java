@@ -54,6 +54,7 @@ public class IozoneResource extends AbstractResource{
 						Integer.valueOf(jSONObject.getString("write")), Integer.valueOf(jSONObject.getString("rewrite")),
 						Integer.valueOf(jSONObject.getString("read")), Integer.valueOf(jSONObject.getString("reread")),
 						Integer.valueOf(jSONObject.getString("randomRead")), Integer.valueOf(jSONObject.getString("randomWrite")));
+				System.out.println("severbeanIozone" + beanIozone.toString());
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

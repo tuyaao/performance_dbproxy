@@ -49,6 +49,7 @@ public class MemResource extends AbstractResource{
 			BeanMem beanMem= null;
 			try {
 				beanMem = new BeanMem(Integer.valueOf(jSONObject.getString("id")), new Date(Long.valueOf(jSONObject.getString("createdTime"))), (float)jSONObject.getDouble("transferSpeed"));
+				System.out.println("severbeanMem" + beanMem.toString());
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

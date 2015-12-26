@@ -23,7 +23,7 @@ public class SettingLoader {
 			SERVER_URL = p.getProperty("SERVER_URL");
 			
 		} catch (Exception e) {
-			SERVER_URL = "http://localhost:2222/monitor-dbproxy/performancedbproxy/";
+			SERVER_URL = "http://localhost:2222/monitor-dbproxy/";
 			logger.warn("Invalid" + SERVER_INFO + "found", e);
 		}
 		

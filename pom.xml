@@ -1,5 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<!-- 之前宋神用tomcat,一些jesper没删掉，我用jetty，必须删掉 -->
 	<modelVersion>4.0.0</modelVersion> <!-- 描述这个POM文件是遵从哪个版本的项目描述符 -->
 	<groupId>monitor-dbproxy</groupId> <!-- GroupID是项目组织唯一的标识符，实际对应JAVA的包的结构，是main目录里java的目录结构。ArtifactID就是项目的唯一的标识符，实际对应项目的名称，就是项目根目录的名称。一般GroupID就是填com.leafive.test这样子。相当于包名和工程名的区别。 -->
 	<artifactId>monitor-dbproxy</artifactId>
@@ -102,6 +103,16 @@
 			<groupId>org.apache.hbase</groupId>
 			<artifactId>hbase</artifactId>
 			<version>0.94.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>tomcat</groupId>
+					<artifactId>jasper-runtime</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>tomcat</groupId>
+					<artifactId>jasper-compiler</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -144,6 +155,14 @@
 				<exclusion>
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>tomcat</groupId>
+					<artifactId>jasper-runtime</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>tomcat</groupId>
+					<artifactId>jasper-compiler</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>

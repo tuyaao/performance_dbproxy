@@ -7,10 +7,15 @@
         class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
 		
-        <property name="jdbcUrl" value="jdbc:mysql://210.14.159.231:3306/appcloud_performance"></property>
-        <property name="user" value="appcloud3.5"></property>
-        <property name="password" value="appcloud3.5"></property>
 		
+		<!--url信息 -->
+		
+        <property name="jdbcUrl" value="jdbc:mysql://202.85.221.152:6033/appcloud_performance"></property>
+        <property name="user" value="root"></property>
+        <property name="password" value="MYSQL@free4inno"></property>
+		
+		<!-- 修改 3,6,25,3,0 为了解决c3p0数据库死锁问题？-->
+		<!-- <property name="checkoutTimeout" value="5000" 5s/>  -->
   		<!-- 后续属性还需要修改 -->
         <property name="initialPoolSize" value="3" />
 		<property name="minPoolSize" value="6" />
@@ -25,7 +30,6 @@
 		<property name="maxIdleTime" value="180" /> <!-- 3min -->
 		<property name="maxConnectionAge" value="10" /> <!-- 1h -->
 		<!-- timeouts and testing -->
-		<property name="checkoutTimeout" value="5000" /> <!-- 5s -->
 		<property name="idleConnectionTestPeriod" value="60" /> <!-- 60 -->
 		<property name="testConnectionOnCheckout" value="true" />
 		<property name="preferredTestQuery" value="SELECT 1" />

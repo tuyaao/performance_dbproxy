@@ -48,9 +48,8 @@ public class CpuResource extends AbstractResource{
 		for(JSONObject jSONObject : list){
 			BeanCpu beanCpu = null;
 			try {
-				
 				beanCpu = new BeanCpu(Integer.valueOf(jSONObject.getString("id")), new Date(Long.valueOf(jSONObject.getString("createdTime"))), (float)jSONObject.getDouble("totalTime"));
-				System.out.println("sever" + beanCpu.toString() );
+				System.out.println("serverbeanCpu" + beanCpu.toString());
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}

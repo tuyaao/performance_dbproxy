@@ -18,6 +18,7 @@ public class test {
 	private static Logger logger = Logger.getLogger(test.class);
 	private static final String BEGIN_TIME = "btime";
 	private static final String END_TIME = "etime";
+	private static final String TIME_ASC = "timeasc";
 
 	public static String getCpu(String id, String Start, String end){
 		Map<String, String> filter = new HashMap<String, String>();
@@ -65,6 +66,7 @@ public class test {
 		filter.put("id", id);
 		filter.put(BEGIN_TIME, Start);
 		filter.put(END_TIME, end);
+		filter.put(TIME_ASC, "no");
 		LogOperation log = new LogOperationImpl("performance-ping", "9bb0613fbc094b60a4d5e4810dae0881", "qKKQk4vPFsjc43VmFDjtVh3nvhlg9zzL");
 	    String string  = log.getLog("performance-ping", filter);
 	    return string;
@@ -73,7 +75,7 @@ public class test {
 	
 	public static void main(String[] args) {
 		test testit = new test();
-		String result = testit.getMem( "35", "1441632000000", "1449203600000" );
+		String result = testit.getPing( "35", "1441632000000", "1449203600000" );
 		logger.error("END_TIME:"+result);
 		JSONObject jSONObject = null;
 		try {
@@ -86,7 +88,6 @@ public class test {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 }

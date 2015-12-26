@@ -33,13 +33,12 @@ public abstract class AbstractResource{
 		 return result.toString();
 	 }
 	
-	protected List<JSONObject> resolveHbaseResult(String result){
+	protected static List<JSONObject> resolveHbaseResult(String result){
 		List<JSONObject> returnit = new ArrayList<JSONObject>();
 		JSONObject jSONObject = null;
 		try {
 			jSONObject = new JSONArray(result).getJSONObject(0);
 			JSONArray jSONArray= jSONObject.getJSONArray("result");
-			System.out.println("初始返回jSONArray:" + jSONArray.toString() );
 			for(int i = 0; i < jSONArray.length(); i++){
 				returnit.add((JSONObject)jSONArray.get(i));
 			}
