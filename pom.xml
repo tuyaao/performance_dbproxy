@@ -38,7 +38,7 @@
 		<dependency>
 			<groupId>com.free4lab.utils</groupId>
 			<artifactId>free4lab-common-utils</artifactId>
-			<version>0.5.9.32-SNAPSHOT</version>
+			<version>1.0.20151224-SNAPSHOT</version>
 			<exclusions>
 				<exclusion>
 					<groupId>javax.persistence</groupId>

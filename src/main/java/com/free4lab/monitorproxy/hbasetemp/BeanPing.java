@@ -5,7 +5,11 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+
 @XmlRootElement(name = "beanPing")
+
 public class BeanPing {
 
 	private Integer id;// 云主机在mysql表里的id

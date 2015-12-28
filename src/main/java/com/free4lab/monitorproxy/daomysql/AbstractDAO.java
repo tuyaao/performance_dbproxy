@@ -11,9 +11,11 @@ import org.hibernate.FlushMode;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.transaction.annotation.Transactional;
 
-
+//MySQL的自动注入并没有用到，等查询符合条件的4核8G的主机的时候就用到了
+@Scope("prototype")
 public abstract class AbstractDAO<T>{
 	
 	//classname

@@ -19,10 +19,14 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+
 
 @Entity
 @Table(name = "vm_hardware")
 @XmlRootElement(name = "vMhardware")
+
 public class VMhardware implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 

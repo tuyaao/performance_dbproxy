@@ -14,6 +14,9 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+
 //使一个POJO类成为一个可持久化的Entity类还需要注意以下几点。
 //·实体类必须有一个默认的无参数的构造方法，并且无参数的构造方法必须是public或protected的。
 //·若要使实体类能够支持序列化，例如支持远程调用，可以实现Serializable接口。实现该接口是可选的，但建议实体类都实现这个接口。
@@ -21,6 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "vm_instance")
 @XmlRootElement(name = "vMInstance")
+
 public class VMInstance implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -35,6 +39,7 @@ public class VMInstance implements java.io.Serializable{
 	private Timestamp updateTime;
 	private String status;
 	private String os;
+	@Autowired
 	private Integer hardware;
 
 	/** default constructor */

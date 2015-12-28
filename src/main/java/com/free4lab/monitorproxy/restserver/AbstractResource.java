@@ -6,8 +6,9 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.context.annotation.Scope;
 
-
+@Scope("prototype")
 public abstract class AbstractResource{
 	
 	protected static final String BEGIN_TIME = "btime";

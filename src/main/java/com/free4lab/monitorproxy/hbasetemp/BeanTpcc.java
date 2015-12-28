@@ -5,7 +5,10 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.springframework.context.annotation.Scope;
+
 @XmlRootElement(name = "beanTpcc")
+
 public class BeanTpcc {
 
 	private Integer id;// 云主机在mysql表里的id

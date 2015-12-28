@@ -2,10 +2,6 @@ package com.free4lab.monitorproxy.daomysql;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +10,14 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+
 
 @Entity
 @Table(name = "cloud_platform")
 @XmlRootElement(name = "cloudPlatform")
+
 //JAXB中的注解，用来根据java类生成xml内容
 public class CloudPlatform implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;

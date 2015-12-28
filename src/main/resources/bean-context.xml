@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
-        
-    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
-    
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd"
+        default-autowire="byType">
+	<!-- <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/> -->
 	<context:component-scan base-package="com.free4lab.monitorproxy.daomysql" />
 	<context:component-scan base-package="com.free4lab.monitorproxy.restserver" />
 	<context:component-scan base-package="com.free4lab.monitorproxy.servicemysqlImpl" />
-	
-	<!-- 注解扫描的包，具体使用什么注解需要加入什么processor，请见http://mushiqianmeng.blog.51cto.com/3970029/723880/
-	                                             http://uule.iteye.com/blog/2096037 -->
-	<!-- 配置文件中使用 context 命名空间之前，必须在 <beans> 元素中声明 context 命名空间:xmlns:context -->
+
 </beans>
+<!-- 配置使用注解，一共有四种注解，请见http://mushiqianmeng.blog.51cto.com/3970029/723880/ 
+	    注解是使用配置实现的，查看如何使用配置实现：http://uule.iteye.com/blog/2096037 context:component-scan：配置注解扫描的包，如果使用这个标签，会自动注入四种注解解析器，所以不用明确声明使用了哪种注解 -->
+<!-- 配置文件中使用 context命名空间之前，必须在 <beans> 元素中声明 context命名空间:xmlns:context -->
