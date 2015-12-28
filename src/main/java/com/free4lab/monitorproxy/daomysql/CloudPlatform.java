@@ -16,9 +16,10 @@ import org.springframework.context.annotation.Scope;
 
 @Entity
 @Table(name = "cloud_platform")
-@XmlRootElement(name = "cloudPlatform")
-
 //JAXB中的注解，用来根据java类生成xml内容
+@XmlRootElement(name = "cloudPlatform")//此注解是jersy或spring传参用的
+
+@Scope("prototype") 
 public class CloudPlatform implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	

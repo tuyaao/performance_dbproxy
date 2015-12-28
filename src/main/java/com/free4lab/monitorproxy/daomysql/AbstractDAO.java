@@ -26,7 +26,6 @@ public abstract class AbstractDAO<T>{
         return getEntityClass().getName();
     }
 	
-	//logger
 	private static Logger logger = LoggerFactory.getLogger(AbstractDAO.class);
     
     //EntityManager

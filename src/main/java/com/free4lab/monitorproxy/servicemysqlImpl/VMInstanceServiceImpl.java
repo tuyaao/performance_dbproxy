@@ -13,8 +13,7 @@ import com.free4lab.monitorproxy.servicemysql.VMInstanceService;
 
 @Service
 public class VMInstanceServiceImpl implements VMInstanceService {
-	private static Logger logger = LoggerFactory.getLogger(VMInstanceServiceImpl.class);
-	
+	private static Logger logger = LoggerFactory.getLogger(VMhardwareServiceImpl.class);
 	@Autowired
 	private VMInstanceDao vMInstanceDao;
 	

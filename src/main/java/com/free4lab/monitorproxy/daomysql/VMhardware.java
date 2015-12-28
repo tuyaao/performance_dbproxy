@@ -27,6 +27,7 @@ import org.springframework.context.annotation.Scope;
 @Table(name = "vm_hardware")
 @XmlRootElement(name = "vMhardware")
 
+@Scope("prototype") 
 public class VMhardware implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 

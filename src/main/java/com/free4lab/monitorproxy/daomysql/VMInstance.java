@@ -25,6 +25,7 @@ import org.springframework.context.annotation.Scope;
 @Table(name = "vm_instance")
 @XmlRootElement(name = "vMInstance")
 
+@Scope("prototype") 
 public class VMInstance implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 

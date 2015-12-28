@@ -13,8 +13,7 @@ import com.free4lab.monitorproxy.servicemysql.VMhardwareService;
 
 @Service
 public class VMhardwareServiceImpl implements VMhardwareService {
-	Logger logger = LoggerFactory.getLogger(VMhardwareServiceImpl.class);
-
+	private static Logger logger = LoggerFactory.getLogger(VMhardwareServiceImpl.class);
 	@Autowired
 	private VMHardwareDao vMhardwareDao;
 

@@ -11,7 +11,11 @@ import java.sql.Timestamp;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.springframework.context.annotation.Scope;
+
 @XmlRootElement(name = "beanHostRegister")//只有这样才回被application/xml序列化，application/xml and application/json 是捆绑在一起使用的
+
+@Scope("prototype") 
 public class BeanHostRegister implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
