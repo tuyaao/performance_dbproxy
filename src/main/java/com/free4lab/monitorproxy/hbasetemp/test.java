@@ -18,6 +18,8 @@ public class test {
 	private static Logger logger = Logger.getLogger(test.class);
 	private static final String BEGIN_TIME = "btime";
 	private static final String END_TIME = "etime";
+	private static final String SIZE = "size";
+	private static final String SIZE_NUM = "1000";
 	private static final String TIME_ASC = "timeasc";
 
 	public static String getCpu(String id, String Start, String end){
@@ -25,9 +27,10 @@ public class test {
 		filter.put("id", id);
 		filter.put(BEGIN_TIME, Start);
 		filter.put(END_TIME, end);
-		LogOperation log = new LogOperationImpl("performance-cpu", "74a6d70b20e448899cf2811e29e0ec13", "JqpaykDFR9xVwBJB8XwwtNvYWZf1xGur");
+		filter.put(SIZE, SIZE_NUM);
+		System.out.println("cpu__"+"id："+id+"--"+BEGIN_TIME+"--"+Start+"--"+END_TIME+"--"+end);
+		LogOperation log = new LogOperationImpl();
 	    String string  = log.getLog("performance-cpu", filter);
-	    System.out.println( string );	
 	    return string;
 		}
 	
@@ -36,7 +39,9 @@ public class test {
 		filter.put("id", id);
 		filter.put(BEGIN_TIME, Start);
 		filter.put(END_TIME, end);
-		LogOperation log = new LogOperationImpl("perfomance-mem", "9d649a7d34be4b318ff59e24e889396a", "e6vwjQOweA5T7B4QVJkEIZw21l7ps4wY");
+		filter.put(SIZE, SIZE_NUM);
+		System.out.println("mem__"+"id："+id+"--"+BEGIN_TIME+"--"+Start+"--"+END_TIME+"--"+end);
+		LogOperation log = new LogOperationImpl();
 	    String string  = log.getLog("performance-mem", filter);
 	    return string;
 		}
@@ -46,7 +51,9 @@ public class test {
 		filter.put("id", id);
 		filter.put(BEGIN_TIME, Start);
 		filter.put(END_TIME, end);
-		LogOperation log = new LogOperationImpl("performance-iozone", "a9e9862808754d3da1c74616de1852b1", "1coXlQo88hyzlinNaqSEr0ONJMXkW7bX");
+		filter.put(SIZE, SIZE_NUM);
+		System.out.println("iozone__"+"id："+id+"--"+BEGIN_TIME+"--"+Start+"--"+END_TIME+"--"+end);
+		LogOperation log = new LogOperationImpl();
 	    String string  = log.getLog("performance-iozone", filter);
 	    return string;
 		}
@@ -56,7 +63,9 @@ public class test {
 		filter.put("id", id);
 		filter.put(BEGIN_TIME, Start);
 		filter.put(END_TIME, end);
-		LogOperation log = new LogOperationImpl("performance-tpcc", "b6e0e7eee096487fb8249d94f3f76639", "zg1ivqqmU5jueO9po8360UoCnUeuBPmE");
+		filter.put(SIZE, SIZE_NUM);
+		System.out.println("tpcc__"+"id："+id+"--"+BEGIN_TIME+"--"+Start+"--"+END_TIME+"--"+end);
+		LogOperation log = new LogOperationImpl();
 	    String string  = log.getLog("performance-tpcc", filter);
 	    return string;
 		}
@@ -66,8 +75,10 @@ public class test {
 		filter.put("id", id);
 		filter.put(BEGIN_TIME, Start);
 		filter.put(END_TIME, end);
+		filter.put(SIZE, SIZE_NUM);
 		filter.put(TIME_ASC, "no");
-		LogOperation log = new LogOperationImpl("performance-ping", "9bb0613fbc094b60a4d5e4810dae0881", "qKKQk4vPFsjc43VmFDjtVh3nvhlg9zzL");
+		System.out.println("ping__"+"id："+id+"--"+BEGIN_TIME+"--"+Start+"--"+END_TIME+"--"+end);
+		LogOperation log = new LogOperationImpl();
 	    String string  = log.getLog("performance-ping", filter);
 	    return string;
 		}
@@ -75,19 +86,28 @@ public class test {
 	
 	public static void main(String[] args) {
 		test testit = new test();
-		String result = testit.getPing( "35", "1441632000000", "1449203600000" );
-		logger.error("END_TIME:"+result);
-		JSONObject jSONObject = null;
-		try {
-			jSONObject = new JSONArray(result).getJSONObject(0);
-			JSONArray jSONArray= jSONObject.getJSONArray("result");
-			for(int i = 0; i < jSONArray.length(); i++){
-				logger.error(jSONArray.get(i));
-				System.out.println("\n");
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		String result = testit.getCpu( "30", "1456300139978", "1456904939978" );
+		logger.error("result:"+result);
+		result = testit.getMem( "30", "1456300139978", "1456904939978" );
+		logger.error("result:"+result);
+		result = testit.getIozone( "30", "1456300139978", "1456904939978" );
+		logger.error("result:"+result);
+		result = testit.getTpcc( "30", "1456300139978", "1456904939978" );
+		logger.error("result:"+result);
+		result = testit.getPing( "30", "1456300139978", "1456904939978" );
+		logger.error("result:"+result);
+//		JSONObject jSONObject = null;
+//		try {
+//			jSONObject = new JSONArray(result).getJSONObject(0);
+//			JSONArray jSONArray= jSONObject.getJSONArray("result");
+//			logger.error("length:"+jSONArray.length());
+//			for(int i = 0; i < jSONArray.length(); i++){
+//				logger.error(jSONArray.get(i));
+//				System.out.println("\n");
+//			}
+//		} catch (JSONException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 }

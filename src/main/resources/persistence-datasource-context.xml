@@ -2,20 +2,16 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
     <bean id="dataSource"
         class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
 		
-		
-		<!--url信息 -->
-		
+		<!--数据库url信息 -->
         <property name="jdbcUrl" value="jdbc:mysql://202.85.221.152:6033/appcloud_performance"></property>
         <property name="user" value="root"></property>
         <property name="password" value="MYSQL@free4inno"></property>
 		
-		<!-- 修改 3,6,25,3,0 为了解决c3p0数据库死锁问题？-->
-		<!-- <property name="checkoutTimeout" value="5000" 5s/>  -->
   		<!-- 后续属性还需要修改 -->
         <property name="initialPoolSize" value="3" />
 		<property name="minPoolSize" value="6" />
@@ -34,5 +30,6 @@
 		<property name="testConnectionOnCheckout" value="true" />
 		<property name="preferredTestQuery" value="SELECT 1" />
 	    <property name="testConnectionOnCheckin" value="true" />
+	    <property name="checkoutTimeout" value="5000"/>
     </bean>
 </beans>
