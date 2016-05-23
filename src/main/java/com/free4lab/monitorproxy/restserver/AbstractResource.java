@@ -1,6 +1,7 @@
 package com.free4lab.monitorproxy.restserver;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +29,17 @@ public abstract class AbstractResource<T>{
 	public String getClassName() {
         return getEntityClass().getName();
     }
+	
+	//String 转 timestamp  tsStr = "2011-05-09 11:49:45"
+	protected Timestamp stringToTimeStamp(String tsStr){
+		Timestamp ts = new Timestamp(System.currentTimeMillis());   
+	    try {   
+	        ts = Timestamp.valueOf(tsStr);   
+	    } catch (Exception e) {   
+	        e.printStackTrace();   
+	    }  
+	    return ts;
+	}
 	
 	//如果通过反射生成对象，不同对象实例化种类太多，不好做。T只是一个类占位符，没办法查看类名，从而知道是哪个类。只能通过getClassName()类似的方法获得。
 	protected List<T> resolveHbaseResultit(String result){
@@ -122,7 +134,7 @@ public abstract class AbstractResource<T>{
 		if(result == null){
 			System.out.println("结果是null");
 		}
-		System.out.println("result:"+result);
+//		System.out.println("result:"+result);
 		List<JSONObject> returnit = new ArrayList<JSONObject>();
 		JSONObject jSONObject = null;
 		try {

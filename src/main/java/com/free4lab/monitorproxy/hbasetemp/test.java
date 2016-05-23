@@ -1,8 +1,10 @@
 package com.free4lab.monitorproxy.hbasetemp;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -10,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.free4lab.monitorproxy.restserver.AbstractResource;
 import com.free4lab.utils.log.LogOperation;
 import com.free4lab.utils.log.LogOperationImpl;
 
@@ -71,6 +74,7 @@ public class test {
 		}
 	
 	public static String getPing(String id, String Start, String end){
+		long projetStart = System.currentTimeMillis();
 		Map<String, String> filter = new HashMap<String, String>();
 		filter.put("id", id);
 		filter.put(BEGIN_TIME, Start);
@@ -80,22 +84,43 @@ public class test {
 		System.out.println("ping__"+"id："+id+"--"+BEGIN_TIME+"--"+Start+"--"+END_TIME+"--"+end);
 		LogOperation log = new LogOperationImpl();
 	    String string  = log.getLog("performance-ping", filter);
+	    System.out.println("pingtotaltime:"+(System.currentTimeMillis()-projetStart)/1000);
 	    return string;
 		}
 	
 	
 	public static void main(String[] args) {
+		String[] s = new String[10];
+		System.out.println(s.length);
+
+		int a =0;
+		int c =0;
+		do{
+			--c;
+			a = a-1;
+			
+		}while(a>0);
+		System.out.println(c);
+			
+		
 		test testit = new test();
-		String result = testit.getCpu( "30", "1456300139978", "1456904939978" );
-		logger.error("result:"+result);
-		result = testit.getMem( "30", "1456300139978", "1456904939978" );
-		logger.error("result:"+result);
-		result = testit.getIozone( "30", "1456300139978", "1456904939978" );
-		logger.error("result:"+result);
-		result = testit.getTpcc( "30", "1456300139978", "1456904939978" );
-		logger.error("result:"+result);
-		result = testit.getPing( "30", "1456300139978", "1456904939978" );
-		logger.error("result:"+result);
+//		String result = testit.getCpu( "30", "1456300139978", "1456904939978" );
+//		logger.error("result:"+result);
+//		result = testit.getMem( "30", "1456300139978", "1456904939978" );
+//		logger.error("result:"+result);
+//		result = testit.getIozone( "30", "1456300139978", "1456904939978" );
+//		logger.error("result:"+result);
+//		result = testit.getTpcc( "30", "1456300139978", "1456904939978" );
+//		logger.error("result:"+result);
+		long projetStart = System.currentTimeMillis();
+		String result = testit.getPing( "30", "1457401406839", "1458006206839" );
+		logger.error("result:"+resolveHbaseResult(result).size());
+		logger.error("totaltime:"+(System.currentTimeMillis()-projetStart)/1000);
+		projetStart = System.currentTimeMillis();
+		result = testit.getMem( "30", "1457401406839", "1458006206839" );
+		logger.error("result:"+resolveHbaseResult(result).size());
+		logger.error("totaltimeMem:"+(System.currentTimeMillis()-projetStart)/1000);
+		
 //		JSONObject jSONObject = null;
 //		try {
 //			jSONObject = new JSONArray(result).getJSONObject(0);
@@ -108,6 +133,25 @@ public class test {
 //		} catch (JSONException e) {
 //			e.printStackTrace();
 //		}
+	}
+	
+	public static List<JSONObject> resolveHbaseResult(String result){
+		if(result == null){
+			System.out.println("结果是null");
+		}
+//		System.out.println("result:"+result);
+		List<JSONObject> returnit = new ArrayList<JSONObject>();
+		JSONObject jSONObject = null;
+		try {
+			jSONObject = new JSONArray(result).getJSONObject(0);
+			JSONArray jSONArray= jSONObject.getJSONArray("result");
+			for(int i = 0; i < jSONArray.length(); i++){
+				returnit.add((JSONObject)jSONArray.get(i));
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return returnit;
 	}
 	
 }

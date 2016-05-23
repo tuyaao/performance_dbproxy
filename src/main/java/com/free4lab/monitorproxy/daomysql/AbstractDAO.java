@@ -205,6 +205,26 @@ public abstract class AbstractDAO<T>{
         }
     }
     
+    /**
+     * 通过一个属性和一个范围查找
+     */
+    @SuppressWarnings("unchecked")
+    public List<T> findByPropertyAndTime(String name,
+            final Object value, String time, final Object startTime, final Object endTime) {
+        try {
+            final String queryString = "select model from " + getClassName() + " model where model."
+                    + name + "= :value and model." + time + " between " + " :timestart" + " and " + " :timeend";
+            Query query = getEntityManager().createQuery(queryString);
+            query.setParameter("value", value);
+            query.setParameter("timestart", startTime);
+            query.setParameter("timeend", endTime);
+            return query.getResultList();
+        } catch (RuntimeException re) {
+            logger.error("find by property name2 failed");
+            throw re;
+        }
+    }
+    
 
     /**
      * 通过属性查找

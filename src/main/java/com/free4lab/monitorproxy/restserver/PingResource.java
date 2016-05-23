@@ -12,12 +12,15 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.stereotype.Component;
 
+import com.free4lab.monitorproxy.daomysql.SumWeekPing;
+import com.free4lab.monitorproxy.daomysql.SumWeekPingDao;
 import com.free4lab.monitorproxy.hbasetemp.BeanPing;
 import com.free4lab.monitorproxy.hbasetemp.test;
 
 @Path("dataPing/")
 @Component
 public class PingResource extends AbstractResource<BeanPing>{
+	private SumWeekPingDao dao = new SumWeekPingDao();
 	
 	@Override
 	public Class getEntityClass() {
@@ -33,6 +36,14 @@ public class PingResource extends AbstractResource<BeanPing>{
 		System.out.println("pingstarttime:" + start);
 		System.out.println("pingendtime:" + end);
 		return resolveHbaseResultit(test.getPing(id, start, end));
+	}
+	
+	@GET
+	@Path("SumPing/{id}/{BEGIN_TIME}/{END_TIME}")
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public List<SumWeekPing> getSumCpu(@QueryParam("id") String id, @QueryParam(BEGIN_TIME) String start, @QueryParam(END_TIME) String end) {
+		return (List<SumWeekPing>)dao.findByPropertyAndTime("uuid", id, "sumTime", stringToTimeStamp(start), stringToTimeStamp(end));
 	}
 	
 	public static void main(String[] args) {
